@@ -1,0 +1,5 @@
+[options]
+
+[properties]
+cross_file = ['/Volumes/Data/VScode/Onethinx/BLE_DEMO/cross_gcc.build']
+

@@ -1,0 +1,6 @@
+\\Mac\Data\VScode\Onethinx\BLE_DEMO\Onethinx_Creator.cydsn\Onethinx_Creator.cyprj|0ab33cf2-f5bb-4705-ac77-567bc7238b07
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|123b2ac2-10e8-4b8a-b734-671e1608c35e
+C:\Users\rolf\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|d8e918b4-1df4-4713-8bae-d79c4ac7a89f
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|e4685ede-9b94-4b35-b61f-6212d3f9490b
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|126ede71-57c9-49ae-9b79-142c6c6e1d71
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|49ca4b1b-636d-4e1f-95c9-2d1ddfb3290b

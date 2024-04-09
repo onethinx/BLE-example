@@ -1,0 +1,17 @@
+dont_use_location p4usbcell -1 -1 0
+dont_use_location USB -1 -1 0
+dont_use_location usbcell -1 -1 0
+set_io "\UART:rx(0)\" iocell 9 0
+set_io "BUTTON(0)" iocell 0 4
+set_location "\BLE:bless_isr\" interrupt -1 -1 24
+set_location "\UART:SCB_IRQ\" interrupt -1 -1 43
+set_location "\UART:SCB\" SCB -1 -1 2
+set_location "ClockGenBlock" CLK_GEN -1 -1 0
+set_location "\BLE:cy_mxs40_ble\" BLE -1 -1 0
+set_location "SRSS" SRSS -1 -1 0
+set_io "\UART:tx(0)\" iocell 9 1
+set_io "CY_SRSS_WCO_IN(0)" iocell 0 0
+set_io "CY_SRSS_WCO_OUT(0)" iocell 0 1
+set_io "LED_R(0)" iocell 12 5
+set_io "LED_B(0)" iocell 12 4
+set_location "ClockBlock" Clock -1 -1 0
