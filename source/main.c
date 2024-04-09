@@ -30,109 +30,17 @@
  *
  ********************************************************************************
  *
- * Created by: Rolf Nooteboom on 2020-10-09
+ * Created by: Rolf Nooteboom on 2024-04-09
  *
- * Sample project to demostrate the integration of a PSoC Creator project
- * into Visual Studio Code
+ * Sample project to demostrate the BLE capabilities with the OTX-18 module
  * 
  * For a description please see:
- * https://github.com/onethinx/Onethinx_Creator
+ * https://github.com/onethinx/BLE-example
  *
  ********************************************************************************/
 
 #include "project.h"
 #include "ble.h"
-#include "OnethinxCore01.h"
-#include "LoRaWAN_keys.h"
-
-/* Go to ../OnethinxCore/LoRaWAN_keys.h and fill in the fields of the TTN_OTAAkeys structure */
-
-coreConfiguration_t	coreConfig = {
-	.Join =
-	{
-		.KeysPtr = 			&TTN_OTAAkeys,
-		.DataRate =			DR_AUTO,
-		.Power =			PWR_MAX,
-		.MAXTries = 		100,
-		.SubBand_1st =     	EU_SUB_BANDS_DEFAULT,
-		.SubBand_2nd =     	EU_SUB_BANDS_DEFAULT
-	},
-	.TX =
-	{
-		.Confirmed = 		false,
-		.DataRate = 		DR_0,
-		.Power = 			PWR_MAX,
-		.FPort = 			1
-	},
-	.RX =
-	{
-		.Boost = 			true
-	},
-	.System =
-	{
-		.Idle =
-		{
-			.Mode = 		M0_DeepSleep,
-			.BleEcoON =		false,
-			.DebugON =		true,
-		}
-	}
-};
-
-sleepConfig_t sleepConfig =
-{
-	.sleepMode = modeDeepSleep,
-	.BleEcoON = false,
-	.DebugON = true,
-	.sleepCores = coresBoth,
-	.wakeUpPin = wakeUpPinHigh(true),
-	.wakeUpTime = wakeUpDelay(0, 0, 0, 20), // day, hour, minute, second
-};
-
-/*******************************************************************************
-* File Name: host_main.c
-*
-* Version 1.0
-*
-* Description:
-*  Simple BLE example project that demonstrates how to configure and use 
-*  Cypress's BLE component APIs and application layer callback. Device 
-*  Information service is used as an example to demonstrate configuring 
-*  BLE service characteristics in the BLE component.
-*
-* Hardware Dependency:
-*  CY8CKIT-062 PSoC6 BLE Pioneer Kit
-*
-******************************************************************************
-* Copyright (2018), Cypress Semiconductor Corporation.
-******************************************************************************
-* This software is owned by Cypress Semiconductor Corporation (Cypress) and is
-* protected by and subject to worldwide patent protection (United States and
-* foreign), United States copyright laws and international treaty provisions.
-* Cypress hereby grants to licensee a personal, non-exclusive, non-transferable
-* license to copy, use, modify, create derivative works of, and compile the
-* Cypress Source Code and derivative works for the sole purpose of creating
-* custom software in support of licensee product to be used only in conjunction
-* with a Cypress integrated circuit as specified in the applicable agreement.
-* Any reproduction, modification, translation, compilation, or representation of
-* this software except as specified above is prohibited without the express
-* written permission of Cypress.
-*
-* Disclaimer: CYPRESS MAKES NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, WITH
-* REGARD TO THIS MATERIAL, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-* WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-* Cypress reserves the right to make changes without further notice to the
-* materials described herein. Cypress does not assume any liability arising out
-* of the application or use of any product or circuit described herein. Cypress
-* does not authorize its products for use as critical components in life-support
-* systems where a malfunction or failure may reasonably be expected to result in
-* significant injury to the user. The inclusion of Cypress' product in a life-
-* support systems application implies that the manufacturer assumes all risk of
-* such use and in doing so indemnifies Cypress against all charges. Use may be
-* limited by and subject to the applicable Cypress software license agreement.
-*****************************************************************************/
-
-     
 
 /*******************************************************************************
 * Function Name: UpdateLedState
@@ -164,15 +72,13 @@ void UpdateLedState(void)
     }
     else 
     {
-        /* In connected state, turn off disconnect indication and advertising 
-        * indication LEDs. 
+        /* In connected state, turn off disconnect indication and turn on 
+        * blue LEDs. 
         */
         Cy_GPIO_Write(LED_R_PORT, LED_R_NUM, 0);
-        Cy_GPIO_Write(LED_B_PORT, LED_B_NUM, 0);
+        Cy_GPIO_Write(LED_B_PORT, LED_B_NUM, 1);
     }
 }
-
-uint32_t count = 1000;
 
 /*******************************************************************************
 * Function Name: _write
@@ -196,37 +102,6 @@ int _write(int file __attribute__((unused)), char *ptr, int len)
 {
     return Cy_SCB_UART_PutArray(UART_HW, ptr, len);
 }
-
-
-
-/*******************************************************************************
-* Function Name: DisUpdateFirmWareRevision
-********************************************************************************
-*
-* Summary:
-*   Updates the Firmware Revision characteristic with BLE Stack version.
-*
-*******************************************************************************/
-static void DisUpdateFirmWareRevision(void)
-{
-    cy_stc_ble_stack_lib_version_t stackVersion;
-    uint8_t fwRev[9u] = "0.0.0.000";
-    
-    if(Cy_BLE_GetStackLibraryVersion(&stackVersion) == CY_BLE_SUCCESS)
-    {
-        /* Transform numbers to ASCII string */
-        fwRev[0u] = stackVersion.majorVersion + '0'; 
-        fwRev[2u] = stackVersion.minorVersion + '0';
-        fwRev[4u] = stackVersion.patch + '0';
-        fwRev[6u] = (stackVersion.buildNumber / 100u) + '0';
-        stackVersion.buildNumber %= 100u; 
-        fwRev[7u] = (stackVersion.buildNumber / 10u) + '0';
-        fwRev[8u] = (stackVersion.buildNumber % 10u) + '0';
-    }
-    
-    Cy_BLE_DISS_SetCharacteristicValue(CY_BLE_DIS_FIRMWARE_REV, sizeof(fwRev), fwRev);
-}
-
 
 /*******************************************************************************
 * Function Name: HostMain
@@ -259,32 +134,33 @@ int main(void)
 
 	/* Initialize BLE */
     Ble_Init();
-
-	// start the notifications timer
-	//Timer_Start()
-    // enable the Blue LED
-    Cy_GPIO_Write(LED_B_PORT, LED_B_NUM, 1);
    
     for( ; ; ) {
-        /* Cy_Ble_ProcessEvents() allows BLE stack to process pending events */
+        /* Allow BLE stack to process pending events */
         Cy_BLE_ProcessEvents();
         
+        /* Send notification at button press */
 		if (Cy_GPIO_Read(BUTTON_PORT, BUTTON_NUM))
 		{
 			if (++btcnt == 10) SendNotification();
 		}
 		else btcnt = 0;
+
+        /* Check for data in UART RX buffer */
         while (Cy_SCB_UART_GetNumInRxFifo(UART_HW))
         {
             if (RXcnt < 240) buffer.data[RXcnt++] = Cy_SCB_UART_Get(UART_HW);
             RXtimeout = 1000;
         }
+        /* Send notification with UART data after a small timeout */
         if (RXtimeout && RXtimeout-- == 1)
         {
             buffer.length = RXcnt;
             SendNotification();
             RXcnt = 0;
         }
+
+        /* Update Leds once in a while */
         if ((++LEDdelay & 16383) == 1) UpdateLedState();
     }
 }

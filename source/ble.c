@@ -3,47 +3,17 @@
 #include "ble.h"
 #include "stdio.h"
 
+/* Reference to buffer defined on main.c */
 extern BLEbuffer buffer;
 
+#ifdef DEBUG
 #define DEBUG_BLE(...) printf(__VA_ARGS__)
-//#define DEBUG_BLE(...)
+#else
+#define DEBUG_BLE(...)
+#endif
 
-// #define MAX_MTU_SIZE                		(512)
-// #define DEFAULT_MTU_SIZE            		(23) 
-// #define NOTIFICATION_PKT_SIZE       		(1)
-// #define SUCCESS                     		(0u)
-// #define TARGET_BDADDR       				{{0xFF, 0xBB, 0xAA, 0x50, 0xA0, 0x00}, 0}
-// #define CUSTOM_SERV0_CHAR0_DESC0_HANDLE     cy_ble_customConfig.customs[0].customServInfo[0].customServCharDesc[1] 
-// #define CUSTOM_SERV0_CHAR0_HANDLE           cy_ble_customConfig.customs[0].customServInfo[0].customServCharHandle 
-// #define CONN_INTERVAL_MULTIPLIER            (1.25f)
-// #define MIN_CONN_INTERVAL                   (16)
-// #define MAX_CONN_INTERVAL                   (16)
-// #define SUPERVISION_TIMEOUT                 (400)
-// #define ADC_REFERENCE_MV                    (3300)
-// #define FSR_SERIES_RESISTANCE               (1000)
-
-#define LED_B_NUM 4u
-#define LED_B_PORT GPIO_PRT12
-
-/*******************************************************************************
-*        Function Prototypes
-*******************************************************************************/
-//static void Ble_Init(void);
-//static void StackEventHandler(uint32 event, void* eventParam);
-//static void SendNotification(void);
-//static int HostMain(void);
-//static bool TimeToSend(void);
-
-//bool isTimeToSend = false;
-
-
-//cy_stc_ble_gap_bd_addr_t    local_addr = TARGET_BDADDR;
-//cy_stc_ble_conn_handle_t appConnHandle;
 cy_stc_ble_gatts_handle_value_ntf_t notificationPacket;
-//volatile uint32_t conn_interval;
-
 cy_en_ble_api_result_t apiResult;
-
 
 /*******************************************************************************
 * Function Name: Ble_Init()
@@ -362,6 +332,34 @@ void SendNotification(void)
     }
     else
         DEBUG_BLE("GATTS Send Notification API Error: 0x%2.2x, Attrhandle: 0x%4X\n", apiResult, notificationPacket.handleValPair.attrHandle);
+}
+
+/*******************************************************************************
+* Function Name: DisUpdateFirmWareRevision
+********************************************************************************
+*
+* Summary:
+*   Updates the Firmware Revision characteristic with BLE Stack version.
+*
+*******************************************************************************/
+static void DisUpdateFirmWareRevision(void)
+{
+    cy_stc_ble_stack_lib_version_t stackVersion;
+    uint8_t fwRev[9u] = "0.0.0.000";
+    
+    if(Cy_BLE_GetStackLibraryVersion(&stackVersion) == CY_BLE_SUCCESS)
+    {
+        /* Transform numbers to ASCII string */
+        fwRev[0u] = stackVersion.majorVersion + '0'; 
+        fwRev[2u] = stackVersion.minorVersion + '0';
+        fwRev[4u] = stackVersion.patch + '0';
+        fwRev[6u] = (stackVersion.buildNumber / 100u) + '0';
+        stackVersion.buildNumber %= 100u; 
+        fwRev[7u] = (stackVersion.buildNumber / 10u) + '0';
+        fwRev[8u] = (stackVersion.buildNumber % 10u) + '0';
+    }
+    
+    Cy_BLE_DISS_SetCharacteristicValue(CY_BLE_DIS_FIRMWARE_REV, sizeof(fwRev), fwRev);
 }
 
 /* [] END OF FILE */

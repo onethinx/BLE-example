@@ -23,6 +23,7 @@
     "project.h": "c",
     "new.h": "c",
     "lorawan_keys.h": "c",
-    "cyfitter_cfg.h": "c"
+    "cyfitter_cfg.h": "c",
+    "ble.h": "c"
   }
 }

@@ -38,7 +38,7 @@ postBuildCommands = ''
 creatorDirectory = 'Onethinx_Creator.cydsn'
 
 # OTX_Extension_print(PROJECTNAME = '${workspaceFolderBasename}')
-PROJECTNAME = 'BLE_DEMO'
+PROJECTNAME = 'BLE-example'
 
 # OTX_Extension_print(ONETHINX_PACK_LOC = '${env:ONETHINX_PACK_LOC}')
 ONETHINX_PACK_LOC = '/Volumes/Data/VScode/GIT/VSCode_OnethinxPack_macOS'
