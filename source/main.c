@@ -254,9 +254,8 @@ int main(void)
 	/* enable global interrupts */
 	__enable_irq();
 
-    /* Start UART (1115200 baud, RX on P9_0, TX on P0_1) */
+    /* Start UART (115200 baud, RX on P9_0, TX on P9_1) */
 	UART_Start();
-
 
 	/* Initialize BLE */
     Ble_Init();
@@ -272,13 +271,13 @@ int main(void)
         
 		if (Cy_GPIO_Read(BUTTON_PORT, BUTTON_NUM))
 		{
-			if (++btcnt == 5) SendNotification();
+			if (++btcnt == 10) SendNotification();
 		}
 		else btcnt = 0;
         while (Cy_SCB_UART_GetNumInRxFifo(UART_HW))
         {
             if (RXcnt < 240) buffer.data[RXcnt++] = Cy_SCB_UART_Get(UART_HW);
-            RXtimeout = 100;
+            RXtimeout = 1000;
         }
         if (RXtimeout && RXtimeout-- == 1)
         {
