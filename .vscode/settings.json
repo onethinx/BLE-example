@@ -5,6 +5,10 @@
       "otx.preLaunch": {
         "script": "${workspaceRoot}/.vscode/meson.js",
       },
+      "otx.selProg": {
+        "script": "${workspaceRoot}/.vscode/meson.js",
+        "button": { "text": "$(wrench) Select Programmer" },
+      },
       "otx.clean": {
         "script": "${workspaceRoot}/.vscode/meson.js",
         "button": { "text": "$(references) Clean-Reconfigure" },
@@ -15,15 +19,13 @@
       },
       "otx.run": {
         "script": "${workspaceRoot}/.vscode/meson.js",
-        "button": { "text": "$(debug-start) Build-and-Launch" },
+        "button": { "text": "$(debug-alt) Build-and-Launch" },
       }
     }
   },
   "files.associations": {
     "project.h": "c",
     "new.h": "c",
-    "lorawan_keys.h": "c",
-    "cyfitter_cfg.h": "c",
-    "ble.h": "c"
+    "lorawan_keys.h": "c"
   }
 }
