@@ -21,7 +21,7 @@
         "script": "${workspaceRoot}/.vscode/meson.js",
         "button": { "text": "$(debug-alt) Build-and-Launch" },
       }
-    }
+    },
   },
   "files.associations": {
     "project.h": "c",

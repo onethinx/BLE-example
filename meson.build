@@ -41,10 +41,10 @@ creatorDirectory = 'Onethinx_Creator.cydsn'
 PROJECTNAME = 'BLE-example'
 
 # OTX_Extension_print(ONETHINX_PACK_LOC = '${env:ONETHINX_PACK_LOC}')
-ONETHINX_PACK_LOC = '/Volumes/Data/VScode/GIT/VSCode_OnethinxPack_macOS'
+ONETHINX_PACK_LOC = '/Applications/OTX-Maestro'
 
 # OTX_Extension_print(ONETHINX_TOOLS_LOC = '${env:ONETHINX_TOOLS_LOC}')
-ONETHINX_TOOLS_LOC = '/Volumes/Data/VScode/GIT/VSCode_OnethinxPack_macOS/tools_3.0'
+ONETHINX_TOOLS_LOC = 'ONETHINX_TOOLS_LOC'
 
 CONFIG_DIR = ONETHINX_PACK_LOC + '/config'
 MESON_SOURCE_LOC = meson.current_source_dir()
@@ -58,7 +58,7 @@ objcopy  		= find_program('arm-none-eabi-objcopy').path()
 objdump  		= find_program('arm-none-eabi-objdump').path()
 size     		= find_program('arm-none-eabi-size').path()
 gdb      		= find_program('arm-none-eabi-gdb').path()
-cymcuelftool 	= find_program(ONETHINX_TOOLS_LOC + '/cymcuelftool-1.0/bin/cymcuelftool').path()
+cymcuelftool 	= find_program('cymcuelftool').path()
 readelf  		= find_program('arm-none-eabi-readelf').path()
 memcalc 		= find_program(CONFIG_DIR + '/scripts/memcalc').path()
 
