@@ -1,5 +1,9 @@
 # Onethinx BLE Example
 This basic example shows how to use Bluetooth with the OTX-18 module.
+## Requirements:
+- Visual Studio Code
+- [OTX-Maestro >= 1.0.2](https://github.com/onethinx/OTX-Maestro)
+  
 ## Description
 Bluetooth Low Energy (BLE) is used in very low-power network and Internet of Things (IoT) solutions using low-cost battery operated devices that can quickly connect and form simple wireless links. Target applications include HID, remote controls, sports and fitness monitors, portable medical devices and smart phone accessories, among many others.
 
