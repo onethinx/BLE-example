@@ -41,12 +41,10 @@ creatorDirectory = 'Onethinx_Creator.cydsn'
 PROJECTNAME = 'BLE-example'
 
 # OTX_Extension_print(ONETHINX_PACK_LOC = '${env:ONETHINX_PACK_LOC}')
-ONETHINX_PACK_LOC = '/Applications/OTX-Maestro'
-
-# OTX_Extension_print(ONETHINX_TOOLS_LOC = '${env:ONETHINX_TOOLS_LOC}')
-ONETHINX_TOOLS_LOC = 'ONETHINX_TOOLS_LOC'
+ONETHINX_PACK_LOC = 'C:/OTX-Maestro_Tools'
 
 CONFIG_DIR = ONETHINX_PACK_LOC + '/config'
+GCC_DIR = ONETHINX_PACK_LOC + '/gcc-arm/bin'
 MESON_SOURCE_LOC = meson.current_source_dir()
 
 CREATOR_DIR = MESON_SOURCE_LOC + '/' + creatorDirectory
@@ -54,12 +52,12 @@ CREATOR_DIR = MESON_SOURCE_LOC + '/' + creatorDirectory
 #================================================================================================================================#
 # import tools
 
-objcopy  		= find_program('arm-none-eabi-objcopy').path()
-objdump  		= find_program('arm-none-eabi-objdump').path()
-size     		= find_program('arm-none-eabi-size').path()
-gdb      		= find_program('arm-none-eabi-gdb').path()
+objcopy  		= find_program(GCC_DIR + '/arm-none-eabi-objcopy').path()
+objdump  		= find_program(GCC_DIR + '/arm-none-eabi-objdump').path()
+size     		= find_program(GCC_DIR + '/arm-none-eabi-size').path()
+gdb      		= find_program(GCC_DIR + '/arm-none-eabi-gdb').path()
 cymcuelftool 	= find_program('cymcuelftool').path()
-readelf  		= find_program('arm-none-eabi-readelf').path()
+readelf  		= find_program(GCC_DIR + '/arm-none-eabi-readelf').path()
 memcalc 		= find_program(CONFIG_DIR + '/scripts/memcalc').path()
 
 #================================================================================================================================#
@@ -113,8 +111,6 @@ linker_args     = [
 
 include_dirs       = [
 # OTX_Extension_HeaderFiles_Start - automatic insert of source files by the OTX VSCode extension. Do not edit below this line
-	'source/OnethinxCore',
-	'source',
 # OTX_Extension_HeaderFiles_End - automatic insert of source files by the OTX VSCode extension. Do not edit above this line
 # Creator_PostBuild_IncludeFolders_Start - automatic insert of include header folders by Creator_PostBuild. Do not edit below this line
 	'Onethinx_Creator.cydsn/Generated_Source/PSoC6',
@@ -151,9 +147,6 @@ sourcefiles       = [
 	CREATOR_DIR + '/system_psoc6_cm4.c',
 	CREATOR_DIR + '/Generated_Source/PSoC6/cyfitter_cfg_otx.c',
 # OTX_Extension_SourceFiles_Start - automatic insert of source files by the OTX VSCode extension. Do not edit below this line
-	'source/OnethinxCore/OnethinxCore01.c',
-	'source/ble.c',
-	'source/main.c',
 # OTX_Extension_SourceFiles_End - automatic insert of source files by the OTX VSCode extension. Do not edit above this line
 # Creator_PostBuild_SourceFiles_Start - automatic insert of source files by Creator_PostBuild. Do not edit below this line
 	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/cyfitter_sysint_cfg.c',

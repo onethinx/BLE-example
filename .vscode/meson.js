@@ -94,8 +94,10 @@ otxClean = async (args) => {
         });
     }
 
-	const mesonBuildFile = path.join(basePath, "meson.build");
-    await updateMeson(mesonBuildFile, [], []);
+	const crossBuildFile = path.join(basePath, "cross_gcc.build");
+    await updateMeson(crossBuildFile, [], []);
+    const mesonBuildFile = path.join(basePath, "meson.build");
+   await updateMeson(mesonBuildFile, [], []);
     ret = await executeTask("Meson: configure");
     if (ret != 0) 
 	{ 
@@ -300,7 +302,7 @@ const { execSync } = require('child_process');
 
 function checkVersion() {
     try {
-        const stdout = execSync('OTX-Maestro-version.sh');
+        const stdout = execSync('OTX-Maestro-version');
         return stdout.toString().trim();
     } catch (error) {
 		//console.error("Error:", error);
