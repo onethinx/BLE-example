@@ -64,6 +64,7 @@ otxClean = async (args) => {
         vscode.window.showErrorMessage(`OTX-Maestro Version Error (got: ${version}, required: ${minimumVersion})`, { modal: true });
         return null;
     }
+	vscode.window.showInformationMessage(`OTX-Maestro Version: ${version}`);
     let { status, message, basePath } = await checkSetup();
     var buildFolder = path.join(basePath, "build");
     var ret = 0;
@@ -302,7 +303,8 @@ const { execSync } = require('child_process');
 
 function checkVersion() {
     try {
-        const stdout = execSync('OTX-Maestro-version');
+		const versionGet = path.join(substituteVariables("${env:ONETHINX_PACK_LOC}"), 'bin', 'OTX-Maestro-version');
+        const stdout = execSync(versionGet);
         return stdout.toString().trim();
     } catch (error) {
 		//console.error("Error:", error);
