@@ -12,6 +12,18 @@
         "command": "${env:ONETHINX_PACK_LOC}/bin/JlinkOnOff/JlinkOnOff on"
     },
     {
+        "label": "Creator: postbuild",
+        "hide": true,
+        "type": "shell",
+        "command": "${env:ONETHINX_PACK_LOC}/bin/Creator_PostBuild -v2 -targetOTX",
+        "args": [],
+        "options": {
+            "statusbar": { "hide" : true },
+            "cwd": "${workspaceFolder}/Onethinx_Creator.cydsn/",
+            "env": { "PATH": "${env:ONETHINX_PACK_LOC}/bin" },
+        }
+    },
+    {
         "label": "Meson: configure",
         "hide": true,
         "type": "shell",

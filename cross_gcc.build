@@ -1,6 +1,6 @@
 [binaries]
 # OTX_Extension_print(ONETHINX_PACK_LOC = '${env:ONETHINX_PACK_LOC}')
-ONETHINX_PACK_LOC = 'C:/OTX-Maestro_Tools'
+ONETHINX_PACK_LOC = '/Applications/OTX-Maestro'
 
 GCC_DIR = ONETHINX_PACK_LOC + '/gcc-arm/bin'
 c       = GCC_DIR + '/arm-none-eabi-gcc'

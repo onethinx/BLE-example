@@ -1,7 +1,10 @@
-//import * as logging from '@cmt/logging';
-const vscode = require("vscode");
+const thisVersion = "1.0.2";
+// Keep the version definition on top
 
-const minimumVersion = "1.0.2";
+const vscode = require("vscode");
+const fs = require("fs");
+const path = require("path");
+const https = require('https');
 
 exports.execute = async (args) => {
     var ret = null;
@@ -9,6 +12,9 @@ exports.execute = async (args) => {
     {
         case 'otx.preLaunch':
             ret = await otxBuild(args); 
+            break;
+		case 'otx.updateProject':
+            ret = await otxUpdate(args);
             break;
         case 'otx.clean':
             ret = await otxClean(args);
@@ -50,21 +56,113 @@ function getDate() {
 //     return null;
 // };
 
-function versionIsLower(versionIn, versionMinimum) {
+function downloadFile(url, destPath) {
+    return new Promise((resolve, reject) => {
+        const file = fs.createWriteStream(destPath);
+        https.get(url, response => {
+            response.pipe(file);
+            file.on('finish', () => {
+                file.close(resolve);
+            });
+        }).on('error', err => {
+            fs.unlink(destPath);
+            reject(err);
+        });
+    });
+}
+
+function readFirstLineFromURL(url) {
+	const options = {
+        headers: {
+            'Cache-Control': 'no-cache'
+        }
+    };
+    return new Promise((resolve, reject) => {
+        https.get(url, options, response => {
+            let data = '';
+            response.on('data', chunk => {
+                data += chunk;
+                const newlineIndex = data.indexOf('\n');
+                if (newlineIndex !== -1) {
+                    resolve(data.slice(0, newlineIndex));
+                    response.destroy();
+                }
+            });
+            response.on('end', () => {
+                resolve(data);
+            });
+        }).on('error', error => {
+            reject(error);
+        });
+    });
+}
+
+function updateFile(folder, file) {
+	basePath = vscode.workspace.workspaceFolders[0].uri.fsPath;
+	vsCodePath = path.join(basePath, folder, file);
+	const folderWithSlash = folder ? folder + '/' : '';
+	downloadFile(`https://raw.githubusercontent.com/onethinx/Maestro-lib/main/${folderWithSlash}${file}`, vsCodePath)
+    //.then(() => console.log('File downloaded successfully.'))
+    .catch(err => console.error('Error downloading file:', err));
+}
+
+otxUpdate = async (args) => {
+	var onlineVersion = thisVersion;
+	const firstMesonLine = await readFirstLineFromURL("https://raw.githubusercontent.com/onethinx/Maestro-lib/main/.vscode/meson.js");
+	const match = firstMesonLine.match(/"([^"]+)"/); // Find the first match of the text inside double quotes in the string
+
+	if (match && match.length > 1) {
+		onlineVersion = match[1]; // Extract the captured group (the version number)
+	}
+	//console.log(`version: ${onlineVersion}`);
+	if (versionCompare(onlineVersion, thisVersion) != 'h')
+	{
+		await vscode.window.showInformationMessage(
+			'No newer project version found online.', 
+			{ modal: true }, // Make the message modal
+		);
+		return;
+	}
+
+	const result = await vscode.window.showInformationMessage(
+		`Project update from ${thisVersion} to ${onlineVersion}.\n\n\
+        This might need an OTX-Meastro update and will update the meson build files and the configuration files in .vscode.\n\n\
+		Backup your project if unsure.\n\nContinue?`, 
+        { modal: true }, // Make the message modal
+        'Yes', 'No'     // Add "Yes" and "No" buttons
+    );
+    if (result != 'Yes') return;
+	updateFile("", 'meson.build');
+	updateFile("", 'cross_gcc.build');
+	updateFile(".vscode", 'launch.json');
+	updateFile(".vscode", 'settings.json');
+	updateFile(".vscode", 'tasks.json');
+	updateFile(".vscode", 'meson.js');
+}
+
+function versionCompare(versionIn, versionMinimum) {
     const v_in =  String(versionIn).split('.').map(Number).reduce((acc, val, idx) => acc * 1000 + val, 0);
 	const v_ref =  String(versionMinimum).split('.').map(Number).reduce((acc, val, idx) => acc * 1000 + val, 0);
-	return v_in < v_ref;
+	if (v_in < v_ref) return 'l';
+	if (v_in > v_ref) return 'h';
+	return 'e';
 }
 
 otxClean = async (args) => {
-	const version = checkVersion();
-	//console.log(`version: ${version}`);
-	if (versionIsLower(version, minimumVersion))
+	const maestroVersion = checkVersion();
+	//console.log(`version: ${maestroVersion}`);
+	var compare = versionCompare(thisVersion, maestroVersion);
+	if (compare == 'h')
 	{
-        vscode.window.showErrorMessage(`OTX-Maestro Version Error (got: ${version}, required: ${minimumVersion})`, { modal: true });
+        vscode.window.showErrorMessage(`Please update OTX Maestro\ngot: ${maestroVersion}\n project: ${thisVersion}`, { modal: true });
         return null;
     }
-	vscode.window.showInformationMessage(`OTX-Maestro Version: ${version}`);
+	if (compare == 'l')
+	{
+        vscode.window.showErrorMessage(`Please update project\ngot: ${thisVersion}\n OTX Maestro: ${maestroVersion}`, { modal: true });
+        return null;
+    }
+	vscode.window.showInformationMessage(`OTX-Maestro Version: ${maestroVersion}`);
     let { status, message, basePath } = await checkSetup();
     var buildFolder = path.join(basePath, "build");
     var ret = 0;
@@ -95,10 +193,16 @@ otxClean = async (args) => {
         });
     }
 
+    ret = await executeTask("Creator: postbuild");
+    if (ret != 0) 
+	{ 
+		vscode.window.showErrorMessage("The build task terminated with exit code:" + JSON.stringify(ret));
+		return null;
+	}
 	const crossBuildFile = path.join(basePath, "cross_gcc.build");
     await updateMeson(crossBuildFile, [], []);
     const mesonBuildFile = path.join(basePath, "meson.build");
-   await updateMeson(mesonBuildFile, [], []);
+    await updateMeson(mesonBuildFile, [], []);
     ret = await executeTask("Meson: configure");
     if (ret != 0) 
 	{ 
@@ -277,9 +381,6 @@ otxRun = async () => {
     return ret;
 };
 
-const fs = require("fs");
-const path = require("path");
-
 async function checkSetup()
 {
     var basePath = "";
@@ -303,7 +404,7 @@ const { execSync } = require('child_process');
 
 function checkVersion() {
     try {
-		const versionGet = path.join(substituteVariables("${env:ONETHINX_PACK_LOC}"), 'bin', 'OTX-Maestro-version');
+		const versionGet = path.join(substituteVariables("${env:ONETHINX_PACK_LOC}"), 'bin', `OTX-Maestro-version ${thisVersion}`);
         const stdout = execSync(versionGet);
         return stdout.toString().trim();
     } catch (error) {

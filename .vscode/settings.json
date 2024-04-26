@@ -6,6 +6,10 @@
       "otx.preLaunch": {
         "script": "${workspaceRoot}/.vscode/meson.js",
       },
+      "otx.updateProject": {
+        "script": "${workspaceRoot}/.vscode/meson.js",
+        "button": { "text": "$(notebook-render-output) Update project" },
+      },
       "otx.selProg": {
         "script": "${workspaceRoot}/.vscode/meson.js",
         "button": { "text": "$(wrench) Select Programmer" },
@@ -23,10 +27,5 @@
         "button": { "text": "$(debug-alt) Build-and-Launch" },
       }
     },
-  },
-  "files.associations": {
-    "project.h": "c",
-    "new.h": "c",
-    "lorawan_keys.h": "c"
   }
 }
