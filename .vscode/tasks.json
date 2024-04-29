@@ -16,13 +16,14 @@
         "hide": true,
         "type": "shell",
         "command": "${env:ONETHINX_PACK_LOC}/bin/Creator_PostBuild -v2 -targetOTX",
-        "args": [],
+        "linux": {
+            "command": "TERM=XTERM ${env:ONETHINX_PACK_LOC}/bin/Creator_PostBuild -v2 -targetOTX"
+        },
         "options": {
             "statusbar": { "hide" : true },
-            "cwd": "${workspaceFolder}/Onethinx_Creator.cydsn/",
-            "env": { "PATH": "${env:ONETHINX_PACK_LOC}/bin" },
+            "cwd": "${workspaceFolder}/Onethinx_Creator.cydsn/"
         }
-    },
+    },  
     {
         "label": "Meson: configure",
         "hide": true,

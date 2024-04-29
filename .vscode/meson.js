@@ -138,6 +138,7 @@ otxUpdate = async (args) => {
 	updateFile(".vscode", 'settings.json');
 	updateFile(".vscode", 'tasks.json');
 	updateFile(".vscode", 'meson.js');
+	vscode.window.showInformationMessage(`Project updated to ${onlineVersion}`);
 }
 
 function versionCompare(versionIn, versionMinimum) {
