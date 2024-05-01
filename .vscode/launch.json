@@ -19,7 +19,6 @@
             "configFiles": [
                 ".vscode/brd.cfg"
             ],
-
             "overrideRestartCommands": [
                 "monitor reset init",
                 "monitor reset run",
