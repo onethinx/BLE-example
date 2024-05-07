@@ -1,12 +1,12 @@
 /***************************************************************************//**
 * \file system_psoc6.h
-* \version 2.20
+* \version 2.20.1
 *
 * \brief Device system header file.
 *
 ********************************************************************************
 * \copyright
-* Copyright 2016-2018, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2016-2020, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
@@ -194,6 +194,14 @@
 * \code -D __STACK_SIZE=0x000000400 \endcode
 * \code -D __HEAP_SIZE=0x000000100 \endcode
 *
+* \note Correct operation of malloc and related functions depends on the working
+* implementation of the 'sbrk' function. Newlib-nano (default C runtime library
+* used by the GNU Arm Embedded toolchain) provides weak 'sbrk' implementation that
+* doesn't check for heap and stack collisions during excessive memory allocations.
+* To ensure the heap always remains within the range defined by __HeapBase and
+* __HeapLimit linker symbols, provide a strong override for the 'sbrk' function:
+* \snippet startup/2.20/snippet/main.c snippet_sbrk
+*
 * \subsubsection group_system_config_heap_stack_config_mdk ARM MDK
 * - <b>Editing source code files</b>\n
 * The heap and stack sizes are defined in the assembler startup files
@@ -309,6 +317,11 @@
 *       <th>Changes</th>
 *       <th>Reason for Change</th>
 *    </tr>
+*   <tr>
+*       <td>2.20.1</td>
+*       <td>Updated documentation.</td>
+*       <td>Added code snippet of 'sbrk' function.</td>
+*   </tr>
 *   <tr>
 *       <td>2.20</td>
 *       <td>Moved the Cy_IPC_SystemSemaInit(), Cy_IPC_SystemPipeInit() functions implementation from IPC to Startup.</td>

@@ -1,6 +1,6 @@
 /***************************************************************************//**
 * \file CY_BLE_custom_config.c
-* \version 2.0
+* \version 2.20
 * 
 * \brief
 *  This file contains the source code of initialization of the config structure for
@@ -8,17 +8,15 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2017-2018, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2017-2019, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
 *******************************************************************************/
 
-
 #include "ble/cy_ble_custom.h"
 
-#if(CY_BLE_MODE_PROFILE && defined(CY_BLE_CUSTOM))
-
+#if (CY_BLE_MODE_PROFILE && defined(CY_BLE_CUSTOM))
 #ifdef CY_BLE_CUSTOM_SERVER
 /* If any Custom Service with custom characteristics is defined in the
 * customizer's GUI, their handles will be present in this array.
@@ -83,7 +81,6 @@ cy_stc_ble_custom_config_t cy_ble_customConfig =
 };
 
 /** @} group_globals */
-
 #endif /* (CY_BLE_MODE_PROFILE && defined(CY_BLE_CUSTOM)) */
 
 /* [] END OF FILE */

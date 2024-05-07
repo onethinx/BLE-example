@@ -1,12 +1,12 @@
 /***************************************************************************//**
 * \file system_psoc6_cm4.c
-* \version 2.20
+* \version 2.20.1
 *
 * The device system-source file.
 *
 ********************************************************************************
 * \copyright
-* Copyright 2016-2018, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2016-2020, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.

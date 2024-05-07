@@ -1,13 +1,13 @@
 /***************************************************************************//**
 * \file cy_ble_clk.c
-* \version 2.70
+* \version 2.90
 *
 * \brief
 *  Contains the source code for the BLE ECO clock.
 *
 ********************************************************************************
 * \copyright
-* Copyright 2017-2021, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2017-2023, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
@@ -714,7 +714,7 @@ static cy_en_ble_eco_status_t Cy_BLE_HAL_MxdRadioEnableClocks(const cy_stc_ble_b
     }
 
     /* Update RADIO LDO trim values */
-    if((Cy_SysLib_GetDeviceRevision() != CY_SYSLIB_DEVICE_REV_0A) && (false))        // Changed from (SFLASH->RADIO_LDO_TRIMS != 0U) to (false) by Creator PostBuild for OTX-18
+    if((Cy_SysLib_GetDeviceRevision() != CY_SYSLIB_DEVICE_REV_0A) && (false))        // Changed from (false) to (false) by Creator PostBuild for OTX-18        // Changed from (SFLASH->RADIO_LDO_TRIMS != 0U) to (false) by Creator PostBuild for OTX-18
     {
         if(status == CY_BLE_ECO_SUCCESS)
         {

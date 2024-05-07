@@ -154,7 +154,7 @@
 #include "cyfitter_gpio.h"
 #include "cyfitter_sysint.h"
 #include "cydisabledsheets.h"
-#include "Clock_1.h"
+#include "UART_clk.h"
 #include "UART.h"
 #include "BLE.h"
 #include "BLE_config.h"

@@ -1,16 +1,12 @@
 #pragma once
 
 /***************************************
-*       Constants
-***************************************/
-
-
-/***************************************
 *       Function Prototypes
 ***************************************/
-void HandleBleProcessing(void);
-void Ble_Init(void);
-void SendNotification(void);
+
+void Ble_Init(uint8_t * devAddress);
+void Ble_SendNotification(void);
+bool Ble_ProcessEvents(void);
 void StackEventHandler(uint32 event, void* eventParam);
 
 typedef struct 

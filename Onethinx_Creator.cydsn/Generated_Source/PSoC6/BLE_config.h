@@ -1,13 +1,13 @@
 /***************************************************************************//**
 * \file CY_BLE_config.h
-* \version 2.0
+* \version 2.20
 *
 * \brief
 *  This file contains auto-generated config defines for the BLE.
 *
 ********************************************************************************
 * \copyright
-* Copyright 2017-2018, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2017-2019, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
@@ -214,7 +214,7 @@ extern "C" {
 #define CY_BLE_CONFIG_ENABLE_PHY_UPDATE             (0u)
 
 /** Radio power calibration. */
-#define CY_BLE_CONFIG_TX_POWER_CALIBRATION_ENABLE     (0u)      
+#define CY_BLE_CONFIG_TX_POWER_CALIBRATION_ENABLE   (0u)      
 
 /** The GAP security level. */
 #define CY_BLE_CONFIG_GAP_SECURITY_LEVEL            (0x00u)

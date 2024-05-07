@@ -14,6 +14,7 @@ extern BLEbuffer buffer;
 
 cy_stc_ble_gatts_handle_value_ntf_t notificationPacket;
 cy_en_ble_api_result_t apiResult;
+bool Ble_Terminated = false;
 
 /*******************************************************************************
 * Function Name: Ble_Init()
@@ -26,7 +27,8 @@ cy_en_ble_api_result_t apiResult;
 *   None
 *
 *******************************************************************************/
-void Ble_Init(void)
+
+void Ble_Init(uint8_t * devAddress)
 {
     cy_stc_ble_stack_lib_version_t stackVersion;
     
@@ -34,11 +36,17 @@ void Ble_Init(void)
     apiResult = Cy_BLE_Start(StackEventHandler);
     
     if(apiResult != CY_BLE_SUCCESS)
+    {
+        Ble_Terminated = true;
         DEBUG_BLE("Cy_BLE_Start API Error: 0x%x\n", apiResult);
+    }
     else
+    {
+        Ble_Terminated = false;
         DEBUG_BLE("BLE Stack Initialized...\n");
+    }
 
-    *cy_ble_config.deviceAddress = (cy_stc_ble_gap_bd_addr_t) {{0x5Au, 0x01u, 0x00u, 0x50u, 0xA0u, 0x00u}, 0x00u };
+    *cy_ble_config.deviceAddress = (cy_stc_ble_gap_bd_addr_t) {{devAddress[5], devAddress[4], devAddress[3], devAddress[2], devAddress[1], devAddress[0]}, 0x00u };
     
     apiResult = Cy_BLE_GetStackLibraryVersion(&stackVersion);
     
@@ -136,7 +144,8 @@ void StackEventHandler(uint32 event, void* eventParam)
             if(Cy_BLE_GetAdvertisementState() == CY_BLE_ADV_STATE_STOPPED)
             {   
                 /* End Advertising period, stop BLE */
-                Cy_BLE_Stop();
+                Ble_Terminated = true;
+                
             }
             break;
         }
@@ -230,6 +239,7 @@ void StackEventHandler(uint32 event, void* eventParam)
         {
             cy_stc_ble_conn_handle_t appConnHandle = *(cy_stc_ble_conn_handle_t *)eventParam;
             DEBUG_BLE("R: GATT Disconnected: %x, %x\n", appConnHandle.attId, appConnHandle.bdHandle);
+            Ble_Terminated = true;
             break;
         }
 
@@ -303,8 +313,52 @@ void StackEventHandler(uint32 event, void* eventParam)
     }
 }
 
+/******************************************************************************
+* Function Name: Cy_BLE_ProcessEvents
+*******************************************************************************
+*
+*  This function checks the internal task queue in the BLE Stack, and pending
+*  operation of the BLE Stack, if any. This must be called at least once
+*  every interval 't' where:
+*   1. 't' is equal to connection interval or scan interval, whichever is
+*       smaller, if the device is in GAP Central mode of operation, or
+*   2. 't' is equal to connection interval or advertisement interval,
+*       whichever is smaller, if the device is in GAP Peripheral mode
+*       of operation.
+*
+*  On calling at every interval 't', all pending operations of the BLE Stack are
+*  processed. This is a blocking function and returns only after processing all
+*  pending events of the BLE Stack. Care should be taken to prevent this call
+*  from any kind of starvation; on starvation, events may be dropped by the
+*  stack. All the events generated will be propagated to higher layers of the
+*  BLE Stack and to the Application layer only after making a call to this
+*  function.
+*
+*  Calling this function can wake BLESS from deep sleep mode (DSM). In the process
+*  of waking from BLESS DSM, the BLE Stack puts the CPU into sleep mode to
+*  save power while polling for a wakeup indication from BLESS. BLESS Wakeup from DSM
+*  can occur if the stack has pending data or control transactions to be performed.
+*
+* \return
+*  true when the BLE stack is terminated
+*
+*******************************************************************************/
+bool Ble_ProcessEvents(void)
+{
+    if (!Ble_Terminated) 
+        Cy_BLE_ProcessEvents();
+    if (Ble_Terminated) 
+    {
+        Cy_BLE_Stop();
+        CyDelay(100);
+        Cy_BLE_ProcessEvents();
+        CyDelay(100);
+    }
+    return Ble_Terminated;
+}
+
 /*******************************************************************************
-* Function Name: SendNotification()
+* Function Name: Ble_SendNotification()
 ********************************************************************************
 * Summary:
 * Sends notification data to the GATT Client
@@ -316,7 +370,7 @@ void StackEventHandler(uint32 event, void* eventParam)
 * None
 *
 *******************************************************************************/
-void SendNotification(void)
+void Ble_SendNotification(void)
 {
     /* Update the notification packet handle */
     notificationPacket.handleValPair.value.val = buffer.data;

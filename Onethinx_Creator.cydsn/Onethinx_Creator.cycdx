@@ -19,5 +19,5 @@
   </block>
   <block name="LED_R" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="LED_B" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="Clock_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="UART_clk" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
 </blockRegMap>

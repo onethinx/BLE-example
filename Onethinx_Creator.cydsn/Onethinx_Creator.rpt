@@ -1,16 +1,16 @@
-Loading plugins phase: Elapsed time ==> 0s.409ms
+Loading plugins phase: Elapsed time ==> 0s.261ms
 <CYPRESSTAG name="CyDsfit arguments...">
-cydsfit arguments: -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p \\Mac\Data\VScode\Onethinx\BLE_DEMO\Onethinx_Creator.cydsn\Onethinx_Creator.cyprj -d CY8C6347BZI-BLD53 -s \\Mac\Data\VScode\Onethinx\BLE_DEMO\Onethinx_Creator.cydsn\Generated_Source\PSoC6 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
+cydsfit arguments: -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p \\Mac\Data\VScode\Greenthinx\BLE-example\Onethinx_Creator.cydsn\Onethinx_Creator.cyprj -d CY8C6347BZI-BLD53 -s \\Mac\Data\VScode\Greenthinx\BLE-example\Onethinx_Creator.cydsn\Generated_Source\PSoC6 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
 </CYPRESSTAG>
 ADD: fit.M0067: information: Clock Information: (The WCO is enabled. Chip startup will be slower because clock configuration cannot continue until the WCO is ready. See the device datasheet for WCO startup timing. If WCO is not required during startup, consider starting it in main() for faster chip startup.).
- * \\Mac\Data\VScode\Onethinx\BLE_DEMO\Onethinx_Creator.cydsn\Onethinx_Creator.cydwr (WCO)
+ * \\Mac\Data\VScode\Greenthinx\BLE-example\Onethinx_Creator.cydsn\Onethinx_Creator.cydwr (WCO)
 
 <CYPRESSTAG name="Design elaboration results...">
 </CYPRESSTAG>
-Elaboration phase: Elapsed time ==> 3s.997ms
+Elaboration phase: Elapsed time ==> 3s.018ms
 <CYPRESSTAG name="HDL generation results...">
 </CYPRESSTAG>
-HDL generation phase: Elapsed time ==> 0s.076ms
+HDL generation phase: Elapsed time ==> 0s.078ms
 <CYPRESSTAG name="Synthesis results...">
 
      | | | | | | |
@@ -28,23 +28,23 @@ HDL generation phase: Elapsed time ==> 0s.076ms
 ======================================================================
 Compiling:  Onethinx_Creator.v
 Program  :   C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\bin\warp.exe
-Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=\\Mac\Data\VScode\Onethinx\BLE_DEMO\Onethinx_Creator.cydsn\Onethinx_Creator.cyprj -dcpsoc3 Onethinx_Creator.v -verilog
+Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=\\Mac\Data\VScode\Greenthinx\BLE-example\Onethinx_Creator.cydsn\Onethinx_Creator.cyprj -dcpsoc3 Onethinx_Creator.v -verilog
 ======================================================================
 
 ======================================================================
 Compiling:  Onethinx_Creator.v
 Program  :   C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\bin\warp.exe
-Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=\\Mac\Data\VScode\Onethinx\BLE_DEMO\Onethinx_Creator.cydsn\Onethinx_Creator.cyprj -dcpsoc3 Onethinx_Creator.v -verilog
+Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=\\Mac\Data\VScode\Greenthinx\BLE-example\Onethinx_Creator.cydsn\Onethinx_Creator.cyprj -dcpsoc3 Onethinx_Creator.v -verilog
 ======================================================================
 
 ======================================================================
 Compiling:  Onethinx_Creator.v
 Program  :   vlogfe
-Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=\\Mac\Data\VScode\Onethinx\BLE_DEMO\Onethinx_Creator.cydsn\Onethinx_Creator.cyprj -dcpsoc3 -verilog Onethinx_Creator.v
+Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=\\Mac\Data\VScode\Greenthinx\BLE-example\Onethinx_Creator.cydsn\Onethinx_Creator.cyprj -dcpsoc3 -verilog Onethinx_Creator.v
 ======================================================================
 
 vlogfe V6.3 IR 41:  Verilog parser
-Sun Apr 07 21:44:43 2024
+Tue May 07 11:31:39 2024
 
 
 ======================================================================
@@ -54,7 +54,7 @@ Options  :    -yv2 -q10 Onethinx_Creator.v
 ======================================================================
 
 vpp V6.3 IR 41:  Verilog Pre-Processor
-Sun Apr 07 21:44:43 2024
+Tue May 07 11:31:39 2024
 
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_virtualmux_v1_0\cy_virtualmux_v1_0.v'
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\ZeroTerminal\ZeroTerminal.v'
@@ -82,11 +82,11 @@ vlogfe:  No errors.
 ======================================================================
 Compiling:  Onethinx_Creator.v
 Program  :   tovif
-Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=\\Mac\Data\VScode\Onethinx\BLE_DEMO\Onethinx_Creator.cydsn\Onethinx_Creator.cyprj -dcpsoc3 -verilog Onethinx_Creator.v
+Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=\\Mac\Data\VScode\Greenthinx\BLE-example\Onethinx_Creator.cydsn\Onethinx_Creator.cyprj -dcpsoc3 -verilog Onethinx_Creator.v
 ======================================================================
 
 tovif V6.3 IR 41:  High-level synthesis
-Sun Apr 07 21:44:43 2024
+Tue May 07 11:31:40 2024
 
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -97,9 +97,9 @@ Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\c
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\mod_cnst.vif'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\mod_mthv.vif'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\mod_genv.vif'.
-Linking '\\Mac\Data\VScode\Onethinx\BLE_DEMO\Onethinx_Creator.cydsn\codegentemp\Onethinx_Creator.ctl'.
+Linking '\\Mac\Data\VScode\Greenthinx\BLE-example\Onethinx_Creator.cydsn\codegentemp\Onethinx_Creator.ctl'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_virtualmux_v1_0\cy_virtualmux_v1_0.v'.
-Linking '\\Mac\Data\VScode\Onethinx\BLE_DEMO\Onethinx_Creator.cydsn\codegentemp\Onethinx_Creator.v'.
+Linking '\\Mac\Data\VScode\Greenthinx\BLE-example\Onethinx_Creator.cydsn\codegentemp\Onethinx_Creator.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\ZeroTerminal\ZeroTerminal.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\or_v1_0\or_v1_0.v'.
 
@@ -109,11 +109,11 @@ tovif:  No errors.
 ======================================================================
 Compiling:  Onethinx_Creator.v
 Program  :   topld
-Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=\\Mac\Data\VScode\Onethinx\BLE_DEMO\Onethinx_Creator.cydsn\Onethinx_Creator.cyprj -dcpsoc3 -verilog Onethinx_Creator.v
+Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=\\Mac\Data\VScode\Greenthinx\BLE-example\Onethinx_Creator.cydsn\Onethinx_Creator.cyprj -dcpsoc3 -verilog Onethinx_Creator.v
 ======================================================================
 
 topld V6.3 IR 41:  Synthesis and optimization
-Sun Apr 07 21:44:43 2024
+Tue May 07 11:31:40 2024
 
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -124,9 +124,9 @@ Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\c
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\mod_cnst.vif'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\mod_mthv.vif'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\mod_genv.vif'.
-Linking '\\Mac\Data\VScode\Onethinx\BLE_DEMO\Onethinx_Creator.cydsn\codegentemp\Onethinx_Creator.ctl'.
+Linking '\\Mac\Data\VScode\Greenthinx\BLE-example\Onethinx_Creator.cydsn\codegentemp\Onethinx_Creator.ctl'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_virtualmux_v1_0\cy_virtualmux_v1_0.v'.
-Linking '\\Mac\Data\VScode\Onethinx\BLE_DEMO\Onethinx_Creator.cydsn\codegentemp\Onethinx_Creator.v'.
+Linking '\\Mac\Data\VScode\Greenthinx\BLE-example\Onethinx_Creator.cydsn\codegentemp\Onethinx_Creator.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\ZeroTerminal\ZeroTerminal.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\or_v1_0\or_v1_0.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\lcpsoc3\stdlogic\cpsoc3.vif'.
@@ -178,16 +178,16 @@ topld:  No errors.
 
 CYPRESS_DIR    : C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp
 Warp Program   : C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\bin\warp.exe
-Warp Arguments : -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=\\Mac\Data\VScode\Onethinx\BLE_DEMO\Onethinx_Creator.cydsn\Onethinx_Creator.cyprj -dcpsoc3 Onethinx_Creator.v -verilog
+Warp Arguments : -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=\\Mac\Data\VScode\Greenthinx\BLE-example\Onethinx_Creator.cydsn\Onethinx_Creator.cyprj -dcpsoc3 Onethinx_Creator.v -verilog
 </CYPRESSTAG>
 Warp synthesis phase: Elapsed time ==> 1s.054ms
 <CYPRESSTAG name="Fitter results...">
 <CYPRESSTAG name="Fitter startup details...">
-cyp3fit: V4.4.0.80, Family: PSoC3, Started at: Sunday, 07 April 2024 21:44:44
-Options: -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=\\Mac\Data\VScode\Onethinx\BLE_DEMO\Onethinx_Creator.cydsn\Onethinx_Creator.cyprj -d CY8C6347BZI-BLD53 Onethinx_Creator.v -verilog
+cyp3fit: V4.4.0.80, Family: PSoC3, Started at: Tuesday, 07 May 2024 11:31:40
+Options: -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=\\Mac\Data\VScode\Greenthinx\BLE-example\Onethinx_Creator.cydsn\Onethinx_Creator.cyprj -d CY8C6347BZI-BLD53 Onethinx_Creator.v -verilog
 </CYPRESSTAG>
 <CYPRESSTAG name="Design parsing">
-Design parsing phase: Elapsed time ==> 0s.430ms
+Design parsing phase: Elapsed time ==> 0s.417ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Tech Mapping">
 <CYPRESSTAG name="Initial Mapping" icon="FILE_RPT_TECHM">
@@ -195,7 +195,7 @@ Design parsing phase: Elapsed time ==> 0s.430ms
 Removing unused cells resulting from optimization
 Done removing unused cells.
 <CYPRESSTAG name="Global Clock Selection" icon="FILE_RPT_TECHM">
-    Fixed Function Clock 0: Automatic-assigning  clock 'Clock_1'. Signal=Net_51_ff0
+    Fixed Function Clock 0: Automatic-assigning  clock 'UART_clk'. Signal=Net_51_ff0
 <CYPRESSTAG name="UDB Clock/Enable Remapping Results">
 </CYPRESSTAG>
 </CYPRESSTAG>
@@ -571,8 +571,8 @@ Sample and Hold               :    0 :    1 :    1 :  0.00 %
 SAR ADC                       :    0 :    1 :    1 :  0.00 %
 DieTemp Sensor                :    0 :    1 :    1 :  0.00 %
 </CYPRESSTAG>
-Technology Mapping: Elapsed time ==> 0s.538ms
-Tech Mapping phase: Elapsed time ==> 0s.647ms
+Technology Mapping: Elapsed time ==> 0s.590ms
+Tech Mapping phase: Elapsed time ==> 0s.707ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Placement">
 <CYPRESSTAG name="FFB & IO Pre Placement">
@@ -595,15 +595,15 @@ SRSS                                : SRSS_[FFB(SRSS,0)]
 </CYPRESSTAG>
 </CYPRESSTAG>
 <CYPRESSTAG name="Real Analog Placement">
-Elapsed time ==> 0.3831104s
+Elapsed time ==> 0.3678854s
 </CYPRESSTAG>
-Analog Placement phase: Elapsed time ==> 1s.622ms
+Analog Placement phase: Elapsed time ==> 1s.567ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Routing">
 <CYPRESSTAG name="Analog Routing">
-Route success=True, Iterations=1 Elapsed=0.0049394 secs
+Route success=True, Iterations=1 Elapsed=0.0029263 secs
 </CYPRESSTAG>
-Analog Routing phase: Elapsed time ==> 0s.009ms
+Analog Routing phase: Elapsed time ==> 0s.000ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Code Generation">
 ============ Analog Final Answer Routes ============
@@ -630,7 +630,7 @@ Map of item to net {
 }
 Mux Info {
 }
-Analog Code Generation phase: Elapsed time ==> 0s.059ms
+Analog Code Generation phase: Elapsed time ==> 0s.046ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Placement">
 <CYPRESSTAG name="Detailed placement messages">
@@ -649,7 +649,7 @@ PLD Packing: Elapsed time ==> 0s.000ms
 Initial Partitioning Summary not displayed at this verbose level.</CYPRESSTAG>
 <CYPRESSTAG name="Final Partitioning Summary">
 Final Partitioning Summary not displayed at this verbose level.</CYPRESSTAG>
-Partitioning: Elapsed time ==> 0s.017ms
+Partitioning: Elapsed time ==> 0s.016ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Final Placement Summary">
 
@@ -1114,33 +1114,33 @@ Port | Pin | Fixed |      Type |       Drive Mode |               Name | Connect
 </CYPRESSTAG>
 </CYPRESSTAG>
 </CYPRESSTAG>
-Digital component placer commit/Report: Elapsed time ==> 0s.507ms
-Digital Placement phase: Elapsed time ==> 9s.348ms
+Digital component placer commit/Report: Elapsed time ==> 0s.512ms
+Digital Placement phase: Elapsed time ==> 8s.702ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Routing">
 "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\bin/sjrouter.exe" --xml-path "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc6/0/route_arch-rrg.cydata" --vh2-path "Onethinx_Creator_r.vh2" --pcf-path "Onethinx_Creator.pco" --des-name "Onethinx_Creator" --dsf-path "Onethinx_Creator.dsf" --sdc-path "Onethinx_Creator.sdc" --lib-path "Onethinx_Creator_r.lib"
 Routing successful.
-Digital Routing phase: Elapsed time ==> 1s.380ms
+Digital Routing phase: Elapsed time ==> 1s.369ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Generation">
-Bitstream Generation phase: Elapsed time ==> 1s.106ms
+Bitstream Generation phase: Elapsed time ==> 1s.103ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Verification">
-Bitstream Verification phase: Elapsed time ==> 0s.004ms
+Bitstream Verification phase: Elapsed time ==> 0s.003ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Static timing analysis">
 Timing report is in Onethinx_Creator_timing.html.
-Static timing analysis phase: Elapsed time ==> 13s.060ms
+Static timing analysis phase: Elapsed time ==> 12s.878ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Data reporting">
 Data reporting phase: Elapsed time ==> 0s.000ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Database update...">
-Design database save phase: Elapsed time ==> 0s.259ms
+Design database save phase: Elapsed time ==> 0s.230ms
 </CYPRESSTAG>
-cydsfit: Elapsed time ==> 27s.997ms
+cydsfit: Elapsed time ==> 27s.094ms
 </CYPRESSTAG>
-Fitter phase: Elapsed time ==> 27s.998ms
-API generation phase: Elapsed time ==> 1s.157ms
+Fitter phase: Elapsed time ==> 27s.094ms
+API generation phase: Elapsed time ==> 1s.049ms
 Dependency generation phase: Elapsed time ==> 0s.015ms
-Cleanup phase: Elapsed time ==> 0s.010ms
+Cleanup phase: Elapsed time ==> 0s.015ms

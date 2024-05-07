@@ -1,13 +1,13 @@
 /***************************************************************************//**
 * \file CY_BLE.c
-* \version 2.0
+* \version 2.20
 * 
 * \brief
 *  This file contains the source code for the Common APIs of the BLE Component.
 * 
 ********************************************************************************
 * \copyright
-* Copyright 2017-2018, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2017-2019, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
@@ -31,7 +31,6 @@
 #endif /* CY_BLE_CONFIG_STACK_MODE_HOST_UART */
 
 #if(CY_BLE_HOST_CONTR_CORE)
-    
 /***************************************
 * Global Variables
 ***************************************/
@@ -120,23 +119,31 @@ cy_en_ble_api_result_t Cy_BLE_Start(cy_ble_callback_t callbackFunc)
 {
     cy_en_ble_api_result_t apiResult = CY_BLE_SUCCESS;
     
-#if CY_BLE_MODE_PROFILE   
-    /* If not initialized, then initialize all the required hardware and software */
+#if CY_BLE_MODE_PROFILE
+    /* Profile mode */
     if(callbackFunc != NULL)
     {
         cy_ble_config.callbackFunc = callbackFunc;
+    }
+    else
+    {
+        apiResult = CY_BLE_ERROR_INVALID_PARAMETER;
+    }
+#else
+    /* HCI mode */
+    #if(CY_BLE_CONFIG_STACK_MODE_CONTR_UART)
+        cy_ble_config.uartIsrConfig = &BLE_uart_isr_cfg;
+        cy_ble_config.uartConfig = &BLE_HAL_Uart_config;
+        cy_ble_config.uartHw = BLE_HAL_Uart_HW;
+    #endif /* CY_BLE_CONFIG_STACK_MODE_CONTR_UART */
+#endif  /* CY_BLE_MODE_PROFILE */
+    
+    /* Init and enable BLE */
+    if(apiResult == CY_BLE_SUCCESS)
+    {
+        /* If not initialized, then initialize all the required hardware and software */
         if(cy_ble_initVar == 0u)
         {
-    #if(CY_BLE_CONFIG_STACK_CONTR_CORE)
-        cy_ble_config.blessIsrConfig = &BLE_bless_isr_cfg;
-    #endif /* (CY_BLE_CONFIG_STACK_CONTR_CORE) */
-
-    #if(CY_BLE_CONFIG_STACK_MODE_HOST_UART)
-        cy_ble_config.uartHostIsrConfig = &BLE_host_uart_isr_cfg;
-        cy_ble_config.uartHostConfig = &BLE_Host_Uart_config;
-        cy_ble_config.uartHostHw = BLE_Host_Uart_HW;
-    #endif  /* (CY_BLE_CONFIG_STACK_MODE_HOST_UART) */
-
             apiResult = Cy_BLE_Init(&cy_ble_config);
             cy_ble_initVar = 1u;
         }
@@ -145,34 +152,6 @@ cy_en_ble_api_result_t Cy_BLE_Start(cy_ble_callback_t callbackFunc)
             apiResult = Cy_BLE_Enable();
         }
     }
-    else
-    {
-        apiResult = CY_BLE_ERROR_INVALID_PARAMETER;
-    }
-#else
-{
-    static cy_stc_ble_config_t config =
-    {
-    #if(CY_BLE_CONFIG_STACK_CONTR_CORE)
-        .blessIsrConfig = &BLE_bless_isr_cfg,
-    #endif /* (CY_BLE_CONFIG_STACK_CONTR_CORE) */
-    
-    #if(CY_BLE_CONFIG_STACK_MODE_CONTR_UART)
-        .uartIsrConfig = &BLE_uart_isr_cfg,
-        .uartConfig = &BLE_HAL_Uart_config,
-        .uartHw = BLE_HAL_Uart_HW
-    #endif /* CY_BLE_CONFIG_STACK_MODE_CONTR_UART */
-    };
-        apiResult = Cy_BLE_Init(&config);
-        cy_ble_initVar = 1u;
-        
-        if(apiResult == CY_BLE_SUCCESS)
-        {
-            apiResult = Cy_BLE_Enable();
-        }
-}
-#endif  /*  profile mode */
-    
     return (apiResult);
 }
 

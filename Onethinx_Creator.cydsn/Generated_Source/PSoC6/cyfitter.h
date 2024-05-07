@@ -25,17 +25,15 @@
 #define BLE_cy_mxs40_ble__IDX 0
 
 /* UART */
+#define UART_clk__DIV_IDX 24
+#define UART_clk__DIV_NUM 0
+#define UART_clk__DIV_TYPE CY_SYSCLK_DIV_16_5_BIT
 #define UART_SCB__HW SCB2
 #define UART_SCB__IDX 2
 #define UART_SCB__SS0_POSITION 0u
 #define UART_SCB__SS1_POSITION 1u
 #define UART_SCB__SS2_POSITION 2u
 #define UART_SCB__SS3_POSITION 3u
-
-/* Clock_1 */
-#define Clock_1__DIV_IDX 24
-#define Clock_1__DIV_NUM 0
-#define Clock_1__DIV_TYPE CY_SYSCLK_DIV_16_5_BIT
 
 /* Miscellaneous */
 #define CY_PROJECT_NAME "Onethinx_Creator"

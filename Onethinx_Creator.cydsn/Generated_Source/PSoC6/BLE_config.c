@@ -1,6 +1,6 @@
 /***************************************************************************//**
 * \file CY_BLE.c
-* \version 2.0
+* \version 2.20
 * 
 * \brief
 *  This file contains the source code of initialization of the config structure
@@ -8,7 +8,7 @@
 * 
 ********************************************************************************
 * \copyright
-* Copyright 2017-2018, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2017-2019, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
@@ -16,16 +16,17 @@
 
 #include "BLE_config.h"
 
-#if CY_BLE_MODE_PROFILE
+#if (CY_BLE_HOST_CONTR_CORE)    
 #include "flash/cy_flash.h"
 #include "ble/cy_ble_event_handler.h"
+#include "cyfitter_sysint_cfg.h"
 
-    
+#if (CY_BLE_MODE_PROFILE)
 /***************************************
 * Global Variables
 ***************************************/
 /* Initializes the cy_stc_ble_gapp_disc_mode_info_t cy_ble_discoveryModeInfo  structure */
-#if(CY_BLE_GAP_ROLE_PERIPHERAL || CY_BLE_GAP_ROLE_BROADCASTER)
+#if (CY_BLE_GAP_ROLE_PERIPHERAL || CY_BLE_GAP_ROLE_BROADCASTER)
 static cy_stc_ble_gapp_adv_params_t cy_ble_gappAdvConfig[0x01u] = {
 
     /* Peripheral configuration 0 */
@@ -108,7 +109,7 @@ cy_stc_ble_gapp_disc_mode_info_t cy_ble_discoveryModeInfo[0x01u] = {
 #endif /* CY_BLE_GAP_ROLE_PERIPHERAL || CY_BLE_GAP_ROLE_BROADCASTER */
 
 /* Initializes the cy_stc_ble_gapc_disc_info_t  cy_ble_discoveryInfo  structure */
-#if(CY_BLE_GAP_ROLE_CENTRAL || CY_BLE_GAP_ROLE_OBSERVER)
+#if (CY_BLE_GAP_ROLE_CENTRAL || CY_BLE_GAP_ROLE_OBSERVER)
 
 #endif /* CY_BLE_GAP_ROLE_CENTRAL || CY_BLE_GAP_ROLE_OBSERVER */
 
@@ -150,7 +151,7 @@ cy_stc_ble_gapp_disc_mode_info_t cy_ble_discoveryModeInfo[0x01u] = {
 
 #endif  /* (CY_BLE_MODE_PROFILE) && (CY_BLE_BONDING_REQUIREMENT == CY_BLE_BONDING_YES) */
 
-#if(CY_BLE_GATT_ROLE_SERVER)
+#if (CY_BLE_GATT_ROLE_SERVER)
 static const cy_stc_ble_gatts_t cy_ble_gatts =
 {
     0x0008u,    /* Handle of the GATT service */
@@ -344,8 +345,6 @@ static const cy_stc_ble_gatts_db_t cy_ble_gattDB[0x24u] = {
 
 #endif /* CY_BLE_MODE_PROFILE */
 
-#if(CY_BLE_GAP_ROLE_CENTRAL || CY_BLE_GAP_ROLE_PERIPHERAL)
-
 /** Initialize BLE configuration parameters structure */
 static const cy_stc_ble_params_t cy_ble_params =
 {
@@ -359,7 +358,6 @@ static const cy_stc_ble_params_t cy_ble_params =
     
         .gattDbIndexCount                   = 0x0024u,
 };
-#endif  /* (CY_BLE_GAP_ROLE_CENTRAL || CY_BLE_GAP_ROLE_PERIPHERAL) */
 
 cy_stc_ble_gap_bd_addr_t cy_ble_deviceAddress = {{0x01u, 0x00u, 0x00u, 0x50u, 0xA0u, 0x00u}, 0x00u };
 
@@ -367,13 +365,15 @@ cy_stc_ble_gap_bd_addr_t cy_ble_deviceAddress = {{0x01u, 0x00u, 0x00u, 0x50u, 0x
 * \addtogroup group_globals
 * @{
 */
+#endif /* CY_BLE_MODE_PROFILE */
 
 /** The configuration structure for BLE */
 cy_stc_ble_config_t cy_ble_config =
 {
+#if (CY_BLE_MODE_PROFILE)
     /* Initialize the GAPP structures */
     /* Initialize the cy_stc_ble_gapp_disc_mode_info_t cy_ble_discoveryModeInfo structure */
-    #if(CY_BLE_GAP_ROLE_PERIPHERAL || CY_BLE_GAP_ROLE_BROADCASTER)
+    #if (CY_BLE_GAP_ROLE_PERIPHERAL || CY_BLE_GAP_ROLE_BROADCASTER)
         .discoveryModeInfo = cy_ble_discoveryModeInfo,
         .gappAdvParams = cy_ble_gappAdvConfig,
     #else
@@ -381,7 +381,7 @@ cy_stc_ble_config_t cy_ble_config =
     #endif /* CY_BLE_GAP_ROLE_PERIPHERAL || CY_BLE_GAP_ROLE_BROADCASTER */
 
     /* Initialize the cy_stc_ble_gapc_disc_info_t  cy_ble_discoveryInfo  structure */
-    #if(CY_BLE_GAP_ROLE_CENTRAL || CY_BLE_GAP_ROLE_OBSERVER)
+    #if (CY_BLE_GAP_ROLE_CENTRAL || CY_BLE_GAP_ROLE_OBSERVER)
         .discoveryInfo = cy_ble_discoveryInfo,
         .gapcScanParams = cy_ble_gapcScanConfig,
     #else
@@ -389,13 +389,13 @@ cy_stc_ble_config_t cy_ble_config =
     #endif /* CY_BLE_GAP_ROLE_CENTRAL || CY_BLE_GAP_ROLE_OBSERVER */
 
     /* Initialize the GATT structures */
-    #if((CY_BLE_GAP_ROLE_CENTRAL || CY_BLE_GAP_ROLE_PERIPHERAL) && (CY_BLE_BONDING_REQUIREMENT == CY_BLE_BONDING_YES))
+    #if ((CY_BLE_GAP_ROLE_CENTRAL || CY_BLE_GAP_ROLE_PERIPHERAL) && (CY_BLE_BONDING_REQUIREMENT == CY_BLE_BONDING_YES))
         .flashStorage = &cy_ble_flashStorage,
     #else
         .flashStorage = NULL,
     #endif /* CY_BLE_GAP_ROLE_CENTRAL || CY_BLE_GAP_ROLE_PERIPHERAL) && (CY_BLE_BONDING_REQUIREMENT == CY_BLE_BONDING_YES */
 
-    #if(CY_BLE_GATT_ROLE_SERVER)
+    #if (CY_BLE_GATT_ROLE_SERVER)
         .gatts            = &cy_ble_gatts,
         .gaps             = &cy_ble_gaps,
         .attValuesCCCD    = cy_ble_attValuesCCCD,
@@ -406,28 +406,30 @@ cy_stc_ble_config_t cy_ble_config =
         .gattDB           = NULL,
     #endif /* CY_BLE_GATT_ROLE_SERVER */
 
-    #if(CY_BLE_GAP_ROLE_CENTRAL || CY_BLE_GAP_ROLE_PERIPHERAL)
+    #if (CY_BLE_GAP_ROLE_CENTRAL || CY_BLE_GAP_ROLE_PERIPHERAL)
         /* Initialize the device security structure */
         .authInfo = cy_ble_authInfo,
     #else
         .authInfo = NULL,
     #endif /* (CY_BLE_GAP_ROLE_CENTRAL || CY_BLE_GAP_ROLE_PERIPHERAL */
 
-    #if(CY_BLE_GAP_ROLE_CENTRAL || CY_BLE_GAP_ROLE_PERIPHERAL)
-        /* Initialize the BLE configuration parameters structure */
-        .params   = &cy_ble_params,
-    #else
-        .params = NULL,
-    #endif /* (CY_BLE_GAP_ROLE_CENTRAL || CY_BLE_GAP_ROLE_PERIPHERAL */
+    /* Initialize the BLE configuration parameters structure */
+    .params   = &cy_ble_params,
 
     /* An application layer event callback function to receive service events from the BLE Component. */
     .callbackFunc   = NULL,
-
+    
     .deviceAddress  = &cy_ble_deviceAddress,
+#endif /* CY_BLE_MODE_PROFILE */
+
+#if (CY_BLE_CONFIG_STACK_CONTR_CORE)
+    /* The BLESS interrupt configuration */
+    .blessIsrConfig = &BLE_bless_isr_cfg,
+#endif /* CY_BLE_CONFIG_STACK_CONTR_CORE */
 };
 
-/** @} group_globals */
+#endif /* CY_BLE_HOST_CONTR_CORE */ 
 
-#endif /* CY_BLE_MODE_PROFILE */
+/** @} group_globals */
 
 /* [] END OF FILE */
