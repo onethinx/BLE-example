@@ -1,0 +1,38 @@
+{
+  "host": {
+    "c": {
+      "id": "gcc",
+      "exelist": [
+        "/Applications/OTX-Maestro/gcc-arm/bin/arm-none-eabi-gcc"
+      ],
+      "linker_exelist": [
+        "/Applications/OTX-Maestro/gcc-arm/bin/arm-none-eabi-gcc"
+      ],
+      "file_suffixes": [
+        "c"
+      ],
+      "default_suffix": "c",
+      "version": "10.3.1",
+      "full_version": "arm-none-eabi-gcc (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)",
+      "linker_id": "ld.bfd"
+    }
+  },
+  "build": {
+    "c": {
+      "id": "clang",
+      "exelist": [
+        "cc"
+      ],
+      "linker_exelist": [
+        "cc"
+      ],
+      "file_suffixes": [
+        "c"
+      ],
+      "default_suffix": "c",
+      "version": "15.0.0",
+      "full_version": "Apple clang version 15.0.0 (clang-1500.1.0.2.5)",
+      "linker_id": "ld64"
+    }
+  }
+}

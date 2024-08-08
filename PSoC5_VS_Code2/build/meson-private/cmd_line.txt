@@ -1,0 +1,5 @@
+[options]
+
+[properties]
+cross_file = ['/Volumes/Data/VScode/GIT/PSoC5_VS_Code/cross_gcc.build']
+
