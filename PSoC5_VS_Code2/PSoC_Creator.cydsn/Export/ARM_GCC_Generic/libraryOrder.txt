@@ -1,1 +1,0 @@
-.\Export\ARM_GCC_Generic\CyComponentLibrary.a
