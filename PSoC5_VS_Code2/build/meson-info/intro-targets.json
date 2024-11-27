@@ -1,0 +1,197 @@
+[
+  {
+    "name": "PSoC5_VS_Code",
+    "id": "PSoC5_VS_Code.elf@exe",
+    "type": "executable",
+    "defined_in": "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/meson.build",
+    "filename": [
+      "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/build/PSoC5_VS_Code.elf"
+    ],
+    "build_by_default": true,
+    "target_sources": [
+      {
+        "language": "c",
+        "compiler": [
+          "/Applications/OTX-Maestro/gcc-arm/bin/arm-none-eabi-gcc"
+        ],
+        "parameters": [
+          "-I/Volumes/Data/VScode/GIT/PSoC5_VS_Code/build/PSoC5_VS_Code.elf.p",
+          "-I/Volumes/Data/VScode/GIT/PSoC5_VS_Code/build",
+          "-I/Volumes/Data/VScode/GIT/PSoC5_VS_Code",
+          "-I/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn",
+          "-I/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5",
+          "-fdiagnostics-color=always",
+          "-D_FILE_OFFSET_BITS=64",
+          "-Wall",
+          "-Winvalid-pch",
+          "-Wextra",
+          "-Wpedantic",
+          "-O0",
+          "-g",
+          "-mcpu=cortex-m3",
+          "-mthumb",
+          "-g",
+          "-DDEBUG",
+          "-DCY_CORE_ID=0",
+          "-Wall",
+          "-ffunction-sections",
+          "-ffat-lto-objects",
+          "-Og"
+        ],
+        "sources": [
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/source/main.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/cyfitter_cfg.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/cymetadata.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/Cm3Start.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/CyDmac.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/CyFlash.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/CyLib.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/cyPm.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/CySpc.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/cyutils.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/cy_em_eeprom.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/P2_0.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/P2_1.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/P2_2.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/P2_3.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/P2_4.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/P2_5.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/P2_6.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/P2_7.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/Timer_1.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/Timer_1_PM.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/Clock_1.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/P0_7.c",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/CyBootAsmGnu.s"
+        ],
+        "generated_sources": [],
+        "unity_sources": []
+      },
+      {
+        "linker": [
+          "/Applications/OTX-Maestro/gcc-arm/bin/arm-none-eabi-gcc"
+        ],
+        "parameters": [
+          "-L/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5",
+          "-Wl,--as-needed",
+          "-Wl,--no-undefined",
+          "-mcpu=cortex-m3",
+          "-mthumb",
+          "-T/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Generated_Source/PSoC5/cm3gcc.ld",
+          "-specs=nano.specs",
+          "-Wl,--gc-sections",
+          "-g",
+          "-ffunction-sections",
+          "-Og",
+          "-ffat-lto-objects",
+          "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/PSoC_Creator.cydsn/Export/ARM_GCC_Generic/CyComponentLibrary.a"
+        ]
+      }
+    ],
+    "extra_files": [],
+    "subproject": null,
+    "dependencies": [
+      "CyComponentLibrary"
+    ],
+    "depends": [],
+    "win_subsystem": "console",
+    "installed": false
+  },
+  {
+    "name": "PSoC5_VS_Code.elf",
+    "id": "PSoC5_VS_Code.elf@cus",
+    "type": "custom",
+    "defined_in": "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/meson.build",
+    "filename": [
+      "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/build/PSoC5_VS_Code1.elf"
+    ],
+    "build_by_default": true,
+    "target_sources": [
+      {
+        "language": "unknown",
+        "compiler": [
+          "/Applications/OTX-Maestro/bin/cyelftool",
+          "-C",
+          "PSoC5_VS_Code.elf",
+          "--flash_row_size",
+          "256",
+          "--flash_size",
+          "262144",
+          "--flash_offset",
+          "0x00000000"
+        ],
+        "parameters": [],
+        "sources": [],
+        "generated_sources": []
+      }
+    ],
+    "extra_files": [],
+    "subproject": null,
+    "dependencies": [],
+    "depends": [],
+    "installed": false
+  },
+  {
+    "name": "PSoC5_VS_Code_no_eeprom.elf",
+    "id": "PSoC5_VS_Code_no_eeprom.elf@cus",
+    "type": "custom",
+    "defined_in": "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/meson.build",
+    "filename": [
+      "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/build/PSoC5_VS_Code_no_eeprom.elf"
+    ],
+    "build_by_default": true,
+    "target_sources": [
+      {
+        "language": "unknown",
+        "compiler": [
+          "/Applications/OTX-Maestro/gcc-arm/bin/arm-none-eabi-objcopy",
+          "-R",
+          ".cyeeprom",
+          "PSoC5_VS_Code.elf",
+          "PSoC5_VS_Code_no_eeprom.elf"
+        ],
+        "parameters": [],
+        "sources": [],
+        "generated_sources": []
+      }
+    ],
+    "extra_files": [],
+    "subproject": null,
+    "dependencies": [],
+    "depends": [],
+    "installed": false
+  },
+  {
+    "name": "PSoC5_VS_Code.memcalc.txt",
+    "id": "PSoC5_VS_Code.memcalc.txt@cus",
+    "type": "custom",
+    "defined_in": "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/meson.build",
+    "filename": [
+      "/Volumes/Data/VScode/GIT/PSoC5_VS_Code/build/PSoC5_VS_Code.memcalc.txt"
+    ],
+    "build_by_default": true,
+    "target_sources": [
+      {
+        "language": "unknown",
+        "compiler": [
+          "/Applications/OTX-Maestro/bin/memcalc",
+          "/Applications/OTX-Maestro/gcc-arm/bin/arm-none-eabi-readelf",
+          "PSoC5_VS_Code.elf",
+          "0x40000",
+          "0x10000",
+          "0x00000000",
+          "0x1FFF8000",
+          "PSoC5_VS_Code.memcalc.txt"
+        ],
+        "parameters": [],
+        "sources": [],
+        "generated_sources": []
+      }
+    ],
+    "extra_files": [],
+    "subproject": null,
+    "dependencies": [],
+    "depends": [],
+    "installed": false
+  }
+]

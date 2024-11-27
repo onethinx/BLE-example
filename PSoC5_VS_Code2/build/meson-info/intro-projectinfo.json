@@ -1,0 +1,6 @@
+{
+  "version": "0.1",
+  "descriptive_name": "meson_test",
+  "subproject_dir": "subprojects",
+  "subprojects": []
+}
