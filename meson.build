@@ -15,10 +15,10 @@ endian     = 'little'
 # Creator_PostBuild_Minumum_Version: '2.10' - used for checking Creator_PostBuild minimum version, do not remove
 
 # Creator_PostBuild_Version_Line - automatic insert of Creator_PostBuild version. Do not edit the line below
-creatorPostBuildVersion = '2.11'
+creatorPostBuildVersion = '2.13'
 
 # Creator_PostBuild_DateTime_Line - automatic insert of Creator Generated DateTime. Do not edit the line below
-creatorGeneratedDateTime = '2024-01-01 00:00:00'
+creatorGeneratedDateTime = '2024-07-22 12:15:04'
 
 # Creator_PostBuild_devicePart_Line - automatic insert of device part by Creator_PostBuild. Do not edit the line below
 devicePart = 'CY8C6347BZI-BLD53'
@@ -67,11 +67,30 @@ memcalc 		= find_program(BIN_DIR + '/memcalc').path()
 
 assembler_args = [
 # Creator_PostBuild_AssemblerOptions_Start - automatic insert of assembler options by Creator_PostBuild. Do not edit below this line
+	'-mcpu=cortex-m4',
+	'-mfloat-abi=softfp',
+	'-mfpu=fpv4-sp-d16',
+	'-mthumb',
+	'-g',
+	'-W',
 # Creator_PostBuild_AssemblerOptions_End - automatic insert of assembler options by Creator_PostBuild. Do not edit above this line
 ]
 
 compiler_args     = [
 # Creator_PostBuild_CompilerOptions_Start - automatic insert of compiler options by Creator_PostBuild. Do not edit below this line
+	'-mcpu=cortex-m4',
+	'-mfloat-abi=softfp',
+	'-mfpu=fpv4-sp-d16',
+	'-mthumb',
+	'-g',
+	'-DDEBUG',
+	'-DCY_CORE_ID=0',
+	'-DCY_PSOC_CREATOR_USED=1',
+	'-DCY8C6347BZI_BLD53',
+	'-Wall',
+	'-ffunction-sections',
+	'-ffat-lto-objects',
+	'-Og',
 # Creator_PostBuild_CompilerOptions_End - automatic insert of compiler options by Creator_PostBuild. Do not edit above this line
 	'-O0'
 ]
@@ -79,6 +98,16 @@ compiler_args     = [
 linker_args     = [
 	'-T'+SCRIPTS_DIR+'/linker/OnethinxCore_18.ld', 		# manual insert of OTX18 linkerfile
 # Creator_PostBuild_LinkerOptions_Start - automatic insert of linker options by Creator_PostBuild. Do not edit below this line
+	'-mcpu=cortex-m4',
+	'-mfloat-abi=softfp',
+	'-mfpu=fpv4-sp-d16',
+	'-mthumb',
+	'-specs=nano.specs',
+	'-Wl,--gc-sections',
+	'-g',
+	'-ffunction-sections',
+	'-Og',
+	'-ffat-lto-objects',
 # Creator_PostBuild_LinkerOptions_End - automatic insert of linker options by Creator_PostBuild. Do not edit above this line
 ]
 
@@ -86,6 +115,30 @@ include_dirs       = [
 # OTX_Extension_HeaderFiles_Start - automatic insert of source files by the OTX VSCode extension. Do not edit below this line
 # OTX_Extension_HeaderFiles_End - automatic insert of source files by the OTX VSCode extension. Do not edit above this line
 # Creator_PostBuild_IncludeFolders_Start - automatic insert of include header folders by Creator_PostBuild. Do not edit below this line
+	'Onethinx_Creator.cydsn/',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/cmsis/include',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/devices/psoc6/include',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/devices/psoc6/include/ip',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/device',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/efuse',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/flash',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/gpio',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/ipc',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/lvd',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/profile',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/prot',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/scb',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/sysanalog',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/sysclk',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/sysint',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/syslib',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/syspm',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/systick',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/trigmux',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/wdt',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware',
 # Creator_PostBuild_IncludeFolders_End - automatic insert of include header folders by Creator_PostBuild. Do not edit above this line
 ]
 
@@ -97,6 +150,78 @@ sourcefiles       = [
 # OTX_Extension_SourceFiles_Start - automatic insert of source files by the OTX VSCode extension. Do not edit below this line
 # OTX_Extension_SourceFiles_End - automatic insert of source files by the OTX VSCode extension. Do not edit above this line
 # Creator_PostBuild_SourceFiles_Start - automatic insert of source files by Creator_PostBuild. Do not edit below this line
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/cyfitter_sysint_cfg.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/cymetadata.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/UART.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/BLE.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/BLE_config.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/BLE_dis_config.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/BLE_custom_config.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/efuse/cy_efuse.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/flash/cy_flash.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/gpio/cy_gpio.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/ipc/cy_ipc_drv.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/ipc/cy_ipc_sema.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/ipc/cy_ipc_pipe.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/lvd/cy_lvd.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/profile/cy_profile.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/prot/cy_prot.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/sysanalog/cy_sysanalog.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/sysclk/cy_sysclk.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/sysint/cy_sysint.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/syslib/cy_syslib.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/syslib/gcc/cy_syslib_gcc.S',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/syspm/cy_syspm.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/systick/cy_systick.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/trigmux/cy_trigmux.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/wdt/cy_wdt.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/device/cy_device.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/scb/cy_scb_common.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/scb/cy_scb_i2c.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/scb/cy_scb_ezi2c.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/scb/cy_scb_spi.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/drivers/peripheral/scb/cy_scb_uart.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_clk.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_hal_int.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_hal_pvt.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_gap.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_gatt.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_event_handler.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_ancs.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_ans.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_aios.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_bas.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_bcs.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_bls.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_bms.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_bts.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_cgms.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_cps.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_cscs.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_cts.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_custom.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_dis.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_ess.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_gls.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_hids.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_hps.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_hrs.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_hts.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_ias.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_ips.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_lls.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_lns.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_ndcs.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_plxs.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_pass.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_rscs.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_rtus.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_scps.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_tps.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_uds.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_wpts.c',
+	'Onethinx_Creator.cydsn/Generated_Source/PSoC6/pdl/middleware/ble/cy_ble_wss.c',
 # Creator_PostBuild_SourceFiles_End - automatic insert of source files by Creator_PostBuild. Do not edit above this line
 ]
 
@@ -109,6 +234,9 @@ cc = meson.get_compiler('c')
 #link_deps = declare_dependency( dependencies : cc.find_library('library', dirs : ['directory/libdir']) )
 link_deps = [
 # Creator_PostBuild_LibSources_Start - automatic insert of include source files by Creator_PostBuild. Do not edit below this line
+	declare_dependency( dependencies : cc.find_library('cy_ble_stack_gcc_host_soft_cm4', dirs : [CREATOR_DIR + '/Generated_Source/PSoC6/pdl/middleware/ble/lib']) ),
+	declare_dependency( dependencies : cc.find_library('cy_ble_stack_gcc_controller_soft_cm4', dirs : [CREATOR_DIR + '/Generated_Source/PSoC6/pdl/middleware/ble/lib']) ),
+	declare_dependency( dependencies : cc.find_library('cy_ble_stack_gcc_manager_soft_cm4', dirs : [CREATOR_DIR + '/Generated_Source/PSoC6/pdl/middleware/ble/lib']) ),
 # Creator_PostBuild_LibSources_End - automatic insert of include source files by Creator_PostBuild. Do not edit above this line
 ]
 

@@ -27,5 +27,6 @@
         "button": { "text": "$(debug-alt) Build-and-Launch" },
       }
     },
-  }
+  },
+  "FSharp.suggestGitignore": false
 }
