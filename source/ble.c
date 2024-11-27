@@ -295,8 +295,8 @@ void StackEventHandler(uint32 event, void* eventParam)
                 uint8_t * data = ((cy_stc_ble_gatts_write_cmd_req_param_t *)eventParam)->handleValPair.value.val;
                 uint8_t length = ((cy_stc_ble_gatts_write_cmd_req_param_t *)eventParam)->handleValPair.value.len;
                 DEBUG_BLE("R: GATT WriteWithoutResponse: '%.*s' (", length, data);
-                for (cnt = 0; cnt < length - 1; cnt++) DEBUG_BLE("%2X-", data[cnt]);
-                DEBUG_BLE("%2X)\n", data[cnt]);
+                for (cnt = 0; cnt < length - 1; cnt ++) DEBUG_BLE("%2X-", data[cnt]);
+                DEBUG_BLE("%2X)\n", buffer.data[cnt]);
                 /* Copy received data to buffer */
                 for (cnt = 0; cnt < length; cnt++) buffer.data[cnt] = data[cnt];
                 buffer.length = length;
@@ -381,7 +381,7 @@ void Ble_SendNotification(void)
     {
         uint8_t cnt;
         DEBUG_BLE("S: Notification sent: '%.*s' (", buffer.length, buffer.data);
-        for (cnt = 0; cnt < buffer.length - 1; cnt++) DEBUG_BLE("%2X-", buffer.data[cnt]);
+        for (cnt = 0; cnt < buffer.length - 1; cnt ++) DEBUG_BLE("%2X-", buffer.data[cnt]);
          DEBUG_BLE("%2X)\n", buffer.data[cnt]);
     }
     else
